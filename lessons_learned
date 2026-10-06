@@ -1,0 +1,84 @@
+What I Learned from This Assignment**
+
+This assignment helped me understand how to build a backend application using Django and Django REST Framework. Before starting this project 
+I had some knowledge of Python and web development.. This project showed me how the different parts of a real application connect and work 
+together. I learned about models, serializers, views, APIs, databases, testing and validation. It was all very hands-on. Helped me see how 
+everything fits together in a real-world system.
+
+**1. Django Framework**
+
+I learned how to create Django models and use them to represent database tables. I worked with models like Product, Box, Order and OrderItem. 
+Understood how they connect through relationships. I saw how ViewSets make it easier to create CRUD APIs with minimal code. I also learned how 
+serializers help convert database objects into API responses and validate input data. I got familiar with URL routing, Django Admin and how 
+database migrations keep the database structure up to date.
+
+
+**2. REST API Development**
+
+This project gave me experience in building a RESTful API. I learned what CRUD operations are. Create, Read, Update and Delete. And when to 
+use HTTP methods like GET and POST. I practiced creating custom API actions, like selecting the right box for an order. I also learned how
+important it is to send error messages and use proper status codes like 400 and 404. Providing data. Such as box dimensions, weight and 
+utilization. Made the API responses much clearer and easier to use.
+
+**3. Testing**
+
+Testing was a part of this project and taught me a lot. I learned the difference between unit testing and integration testing. Unit tests
+helped me check pieces like models and the algorithm logic. Integration tests helped me see if the full API worked together as expected. I
+realized how important it is to test edge cases. Not the usual situations. The 21 test cases I wrote helped me discover bugs andmade the 
+application more reliable. I now understand that testing is not optional. It’s essential.
+
+**4. Database and Data Modeling**
+
+I learned how to design a database structure based on requirements. I used relationships like ForeignKey and ManyToMany. I also learned when 
+a through model is needed. Especially when you need to store information in a relationship. I used validators to make sure only correct data 
+gets into the database. I created helper methods to calculate things like product volume and total order weight. This helped keep the code
+
+clean and the logic clear.
+
+**5. Code Quality and Development Practices**
+
+This project taught me that writing code is not about making it work. It’s also about making it clean, readable, maintainable and well-documented.
+I learned to separate responsibilities. Like keeping models, serializers and views independent. I understood why documentation matters. It helps
+others (and my future self) understand what the code does. I also got better at using Git for version control. I used a Makefile to make common 
+tasks easier, like running tests or starting the server. I learned that proper error handling makes the application more stable and user-friendly.
+
+**6. Problem-Solving**
+
+The challenging part was the box selection algorithm. I had to consider dimensions, rotation, weight limits, multiple products and efficiency 
+at once. The best way to solve this was to break the problem into pieces. I worked on each condition separately. Like checking if a product 
+fits in a box, testing rotation then checking weight limits. I tested different scenarios. This helped me find where the algorithm failed and
+how to fix it. I learned that solving problems step by step is much more effective than trying to do everything at once.
+
+**What Surprised Me**
+
+What surprised me the most was how a task. Like choosing a box for an order. Could get so complicated. I didn’t expect many constraints to 
+affect the result. I also realized that handling edge cases is just as important as building the feature. Sometimes the hardest parts are not 
+the ones but the ones that don’t happen often. But still need to be managed.
+
+**Key Learnings**
+
+The main things I learned from this assignment are:
+
+- Django makes backend and API development easier and faster.
+
+- Algorithms must consider all constraints and edge cases.
+
+- Testing is essential to find bugs and improve reliability.
+
+- Clean code and clear documentation make projects easier to maintain.
+
+- Breaking a problem into smaller parts makes it much easier to solve.
+
+**Future Improvements**
+
+If I kept working on this project I would improve the box selection algorithm. I would look into advanced 3D packing methods. I could also add 
+customer preferences, different shipping costs and pricing tiers. I could even connect with shipping APIs to get live rates. For a system I
+would focus on performance, logging, monitoring and handling a large number of orders. These improvements would make the application more 
+practical and scalable.
+
+**Overall Reflection**
+
+Overall this assignment gave me experience in Django, REST APIs, database design, algorithms, testing and software development practices. It 
+helped me move beyond theory. See how all these pieces come together in a working application. It was not about learning one skill. It was 
+about understanding how they connect. This project improved my problem-solving skills. Gave me a better feel, for how real backend systems are
+built, tested and maintained. It was challenging, but very rewarding.
