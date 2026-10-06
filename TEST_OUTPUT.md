@@ -1,3 +1,17 @@
+# Test Run Output
+
+**Result: PASS — 7 tests passed, 0 failures.**
+
+- **Date:** 6 October 2026
+- **Command:** `python manage.py test shipping --verbosity 2`
+- **Environment:** Django 4.2.30, Python 3.9.6
+- **Duration:** 0.023 seconds
+
+The Django test runner creates and destroys an isolated test database for this run; it does not use the local development database.
+
+## Terminal output
+
+```text
 Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
 Found 7 test(s).
 Operations to perform:
@@ -36,7 +50,10 @@ test_returns_none_when_no_box_can_fit (shipping.tests.BoxRecommendationTests) ..
 test_total_weight_and_volume_are_calculated (shipping.tests.BoxRecommendationTests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.024s
+Ran 7 tests in 0.023s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+```
+
+For the scenario descriptions and application screenshots, see [TEST_CASES.md](TEST_CASES.md).

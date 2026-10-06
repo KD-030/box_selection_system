@@ -56,6 +56,7 @@ The placement method is a practical heuristic, not an exhaustive solution to the
 
 ## Related files
 - [AI_USAGE.md](AI_USAGE.md)
+- [TEST_CASES.md](TEST_CASES.md)
 - [TEST_OUTPUT.md](TEST_OUTPUT.md)
 
 ## Assignment materials to complete
