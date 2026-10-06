@@ -16,9 +16,10 @@ python manage.py test shipping --verbosity 2
 | `test_rejects_order_that_fails_three_dimensional_packing` | Total volume is below box volume, but the items cannot be placed without overlap. | The box is rejected. |
 | `test_repeated_product_selections_are_combined` | The same product is selected in multiple form slots. | One order line is saved with the quantities combined; no uniqueness error occurs. |
 | `test_returns_none_when_no_box_can_fit` | No available box can hold the order. | No box is recommended. |
+| `test_seed_command_preserves_existing_catalogue_records` | The seed command runs after catalogues already contain records. | Existing product and box records remain unchanged. |
 | `test_total_weight_and_volume_are_calculated` | An order contains multiple products and quantities. | Calculated weight and volume match the expected values. |
 
-All seven automated tests passed in the latest run. See [`TEST_OUTPUT.md`](TEST_OUTPUT.md) for the result and test runner output.
+All eight automated tests passed in the latest run. See [`TEST_OUTPUT.md`](TEST_OUTPUT.md) for the result and test runner output.
 
 ## Application screenshots
 

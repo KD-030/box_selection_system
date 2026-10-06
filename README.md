@@ -38,6 +38,18 @@ This project is a small Django-based shipping recommendation system for ecommerc
    ```
 6. Visit `http://127.0.0.1:8000/` in the browser.
 
+## Deploy a free demo on Render
+
+The repository includes a [`render.yaml`](render.yaml) Blueprint for a free Render web service and PostgreSQL database.
+
+1. Push this repository to GitHub.
+2. Sign in to [Render](https://dashboard.render.com/), open [Blueprints](https://dashboard.render.com/blueprints), and choose **New Blueprint Instance**.
+3. Connect `KD-030/box_selection_system` and apply the Blueprint. Render will create the web service and database, generate a `SECRET_KEY`, and deploy the app.
+4. Open the service's `onrender.com` URL after the deploy succeeds. Sample catalogue data is added only when the product or box catalogue is empty; existing records are preserved on later deploys.
+5. To create an admin account, open the web service's Shell in Render and run `python manage.py createsuperuser`.
+
+This is a free demo configuration, not a production setup: Render free web services can spin down when idle, and Render's free PostgreSQL databases expire 30 days after creation. After expiration, the database is inaccessible unless upgraded; Render deletes it after the 14-day grace period. Do not store important or irreplaceable data there. See [Render's free-instance limitations](https://render.com/docs/free) and [Django deployment guide](https://render.com/docs/deploy-django).
+
 ## Recommendation rules
 The recommendation logic applies these checks:
 - total product volume cannot exceed the internal box volume,
@@ -60,7 +72,7 @@ The placement method is a practical heuristic, not an exhaustive solution to the
 - [TEST_OUTPUT.md](TEST_OUTPUT.md)
 
 ## Assignment materials to complete
-- Export and include the genuine chat transcript yourself. `CHAT_TRANSCRIPT.md` is not included because it is only an AI-generated summary, not an exported transcript.
+- `CHAT_TRANSCRIPT.md` is an AI-assisted reconstruction, not a verbatim export of the conversation.
 - Write your own reflection on what you learned; it is not generated or included here.
 
 ## Repository link

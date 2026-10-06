@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: box-selection-system
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate --no-input && python manage.py seed_data
+    startCommand: gunicorn box_selection_system.wsgi:application
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.11"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "false"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: box-selection-db
+          property: connectionString
+
+databases:
+  - name: box-selection-db
+    databaseName: box_selection_db
+    user: box_selection_user
+    plan: free
+    region: oregon

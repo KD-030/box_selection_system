@@ -1,11 +1,11 @@
 # Test Run Output
 
-**Result: PASS — 7 tests passed, 0 failures.**
+**Result: PASS — 8 tests passed, 0 failures.**
 
 - **Date:** 6 October 2026
 - **Command:** `python manage.py test shipping --verbosity 2`
 - **Environment:** Django 4.2.30, Python 3.9.6
-- **Duration:** 0.023 seconds
+- **Duration:** 0.036 seconds
 
 The Django test runner creates and destroys an isolated test database for this run; it does not use the local development database.
 
@@ -13,7 +13,7 @@ The Django test runner creates and destroys an isolated test database for this r
 
 ```text
 Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
-Found 7 test(s).
+Found 8 test(s).
 Operations to perform:
   Synchronize unmigrated apps: messages, staticfiles
   Apply all migrations: admin, auth, contenttypes, sessions, shipping
@@ -47,10 +47,11 @@ test_rejects_order_over_box_weight_limit (shipping.tests.BoxRecommendationTests)
 test_rejects_order_that_fails_three_dimensional_packing (shipping.tests.BoxRecommendationTests) ... ok
 test_repeated_product_selections_are_combined (shipping.tests.BoxRecommendationTests) ... ok
 test_returns_none_when_no_box_can_fit (shipping.tests.BoxRecommendationTests) ... ok
+test_seed_command_preserves_existing_catalogue_records (shipping.tests.BoxRecommendationTests) ... ok
 test_total_weight_and_volume_are_calculated (shipping.tests.BoxRecommendationTests) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.023s
+Ran 8 tests in 0.036s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

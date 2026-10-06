@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.core.management import call_command
 from django.test import TestCase
 
 from shipping.models import Box, Order, OrderItem, Product
@@ -91,6 +92,17 @@ class BoxRecommendationTests(TestCase):
         order = Order.objects.get(customer_name='Morgan')
         self.assertEqual(order.items.count(), 1)
         self.assertEqual(order.items.get(product=self.laptop).quantity, 3)
+
+    def test_seed_command_preserves_existing_catalogue_records(self):
+        initial_product_count = Product.objects.count()
+        initial_box_count = Box.objects.count()
+
+        call_command('seed_data', verbosity=0)
+
+        self.assertEqual(Product.objects.count(), initial_product_count)
+        self.assertEqual(Box.objects.count(), initial_box_count)
+        self.assertTrue(Product.objects.filter(pk=self.laptop.pk).exists())
+        self.assertTrue(Box.objects.filter(pk=self.small_box.pk).exists())
 
     def test_product_can_be_rotated_to_fit(self):
         rotated_box = Box.objects.create(
