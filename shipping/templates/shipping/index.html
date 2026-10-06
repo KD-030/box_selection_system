@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101b2d" />
+    <title>Boxwise | Shipping workspace</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17243a;
+        --muted: #66758b;
+        --line: #e4eaf1;
+        --paper: #ffffff;
+        --canvas: #f5f7fa;
+        --navy: #101b2d;
+        --blue: #345fe8;
+        --blue-dark: #2449c6;
+        --mint: #c8f2dc;
+        --green: #147c55;
+        --amber: #fff2d5;
+        --shadow: 0 18px 48px rgba(24, 39, 64, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(ellipse at 85% 0%, rgba(210, 225, 255, 0.48), transparent 34rem),
+          var(--canvas);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+      a { color: inherit; }
+      .topbar {
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 0 max(24px, calc((100vw - 1160px) / 2));
+        color: #f7f9fc;
+        background: var(--navy);
+      }
+      .brand { display: flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: -0.03em; }
+      .brand-mark {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 10px;
+        color: var(--navy);
+        background: var(--mint);
+        font-size: 19px;
+      }
+      .topbar-meta { color: #b8c3d4; font-size: 13px; }
+      main { width: min(1160px, calc(100% - 48px)); margin: 0 auto; padding: 54px 0 72px; }
+      .eyebrow {
+        margin: 0 0 11px;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(230px, 0.6fr);
+        align-items: end;
+        gap: 36px;
+        margin-bottom: 30px;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 650px; margin-bottom: 12px; font-size: clamp(34px, 5vw, 54px); line-height: 1.05; letter-spacing: -0.055em; }
+      .hero-copy { max-width: 630px; margin-bottom: 0; color: var(--muted); font-size: 17px; }
+      .rule-note {
+        padding: 17px 19px;
+        border: 1px solid #dce6f5;
+        border-radius: 15px;
+        color: #52617a;
+        background: rgba(255, 255, 255, 0.72);
+        font-size: 13px;
+      }
+      .rule-note strong { display: block; margin-bottom: 4px; color: var(--ink); }
+      .workspace { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr); gap: 20px; align-items: start; }
+      .card {
+        overflow: hidden;
+        border: 1px solid rgba(221, 229, 239, 0.9);
+        border-radius: 18px;
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+      .card-head { padding: 23px 25px 0; }
+      .card-body { padding: 21px 25px 25px; }
+      .card h2 { margin-bottom: 5px; font-size: 19px; letter-spacing: -0.025em; }
+      .card-subtitle { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+      .section-number {
+        display: inline-grid;
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+        place-items: center;
+        border-radius: 9px;
+        color: var(--blue);
+        background: #edf2ff;
+        font-size: 12px;
+        vertical-align: 2px;
+      }
+      .field { min-width: 0; margin-bottom: 17px; }
+      .field label { display: block; margin-bottom: 7px; color: #35445b; font-size: 12px; font-weight: 700; }
+      input, select {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid #d9e1eb;
+        border-radius: 10px;
+        outline: none;
+        color: var(--ink);
+        background: #fff;
+        font: inherit;
+        transition: border-color 120ms ease, box-shadow 120ms ease;
+      }
+      input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(52, 95, 232, 0.12); }
+      .product-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 125px;
+        gap: 12px;
+        align-items: end;
+        padding: 14px 0 0;
+        border-top: 1px solid #edf0f5;
+      }
+      .product-row:first-of-type { margin-top: 7px; }
+      .product-row .field { margin-bottom: 14px; }
+      .form-errors, .errorlist { margin: 0 0 12px; padding-left: 18px; color: #b42335; font-size: 12px; }
+      .primary-button {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 11px;
+        color: white;
+        background: var(--blue);
+        box-shadow: 0 8px 16px rgba(52, 95, 232, 0.2);
+        cursor: pointer;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 750;
+        transition: background 120ms ease, transform 120ms ease;
+      }
+      .primary-button:hover { background: var(--blue-dark); transform: translateY(-1px); }
+      .hint { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
+      .catalogue-stack { display: grid; gap: 20px; }
+      .catalogue-card .card-body { padding-top: 15px; }
+      .catalogue-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+      .catalogue-item {
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr);
+        align-items: center;
+        gap: 11px;
+        padding: 11px;
+        border: 1px solid #edf0f5;
+        border-radius: 12px;
+        background: #fcfdff;
+      }
+      .item-icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border-radius: 11px;
+        background: #f0f4fa;
+        font-size: 17px;
+      }
+      .item-title { display: block; margin-bottom: 2px; font-size: 12px; font-weight: 750; }
+      .item-detail { display: block; color: var(--muted); font-size: 11px; }
+      .empty-state { padding: 10px 0; color: var(--muted); font-size: 13px; }
+      .result { margin: 22px 0 0; }
+      .result-success { border-color: #bfebd2; background: linear-gradient(135deg, #f1fcf6, #fff 70%); }
+      .result-warning { border-color: #f0dcae; background: linear-gradient(135deg, #fff9eb, #fff 70%); }
+      .result .card-body { padding: 22px 25px; }
+      .result-title { margin-bottom: 3px; font-size: 19px; }
+      .result-description { margin-bottom: 17px; color: var(--muted); font-size: 13px; }
+      .recommended-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 17px;
+        border: 1px solid #d8efdf;
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.76);
+      }
+      .recommended-name { display: block; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+      .recommended-size { color: var(--muted); font-size: 12px; }
+      .price { color: var(--green); font-size: 23px; font-weight: 850; letter-spacing: -0.04em; white-space: nowrap; }
+      .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 13px; }
+      .stat { padding: 12px; border: 1px solid #e8edf4; border-radius: 11px; background: rgba(255,255,255,.75); }
+      .stat-label { display: block; color: var(--muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+      .stat-value { display: block; margin-top: 3px; font-size: 13px; font-weight: 750; }
+      .order-lines { display: grid; gap: 8px; margin: 13px 0 0; padding: 0; list-style: none; }
+      .order-lines li { display: flex; justify-content: space-between; gap: 12px; color: #52617a; font-size: 12px; }
+      .order-lines li span:last-child { color: var(--ink); font-weight: 700; }
+      .result-footnote { margin: 13px 0 0; color: var(--green); font-size: 11px; }
+      .footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); color: #8490a2; font-size: 11px; }
+
+      @media (max-width: 800px) {
+        .hero { grid-template-columns: 1fr; gap: 20px; }
+        .workspace { grid-template-columns: 1fr; }
+        .catalogue-stack { grid-template-columns: 1fr 1fr; align-items: start; }
+      }
+      @media (max-width: 560px) {
+        .topbar { min-height: 62px; padding: 0 18px; }
+        .topbar-meta { display: none; }
+        main { width: min(100% - 30px, 1160px); padding: 36px 0 48px; }
+        h1 { font-size: 39px; }
+        .hero-copy { font-size: 15px; }
+        .card-head { padding: 20px 18px 0; }
+        .card-body { padding: 18px; }
+        .catalogue-stack { grid-template-columns: 1fr; }
+        .product-row { grid-template-columns: minmax(0, 1fr) 95px; gap: 9px; }
+        .stats { grid-template-columns: 1fr; }
+        .recommended-box { align-items: flex-start; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">▧</span><span>boxwise</span></div>
+      <div class="topbar-meta">WAREHOUSE WORKSPACE&nbsp; / &nbsp;PACKING</div>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Shipping operations</p>
+          <h1>Find the right box.<br />Ship with confidence.</h1>
+          <p class="hero-copy">Build an order and get the lowest-cost box that can actually fit every item, including rotated orientations and total weight.</p>
+        </div>
+        <aside class="rule-note">
+          <strong>How recommendations work</strong>
+          Item dimensions can rotate. The packer checks available space in three dimensions, then ranks valid boxes by price.
+        </aside>
+      </section>
+
+      <section class="workspace" aria-label="Create an order and view inventory">
+        <article class="card">
+          <div class="card-head">
+            <h2><span class="section-number">01</span>Build an order</h2>
+            <p class="card-subtitle">Choose products and quantities to check packing options.</p>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+              <div class="field">
+                {{ form.customer_name.label_tag }}
+                {{ form.customer_name }}
+                {{ form.customer_name.errors }}
+              </div>
+              <div class="product-row">
+                <div class="field">
+                  {{ form.product_1.label_tag }}
+                  {{ form.product_1 }}
+                  {{ form.product_1.errors }}
+                </div>
+                <div class="field">
+                  {{ form.quantity_1.label_tag }}
+                  {{ form.quantity_1 }}
+                  {{ form.quantity_1.errors }}
+                </div>
+              </div>
+              <div class="product-row">
+                <div class="field">
+                  {{ form.product_2.label_tag }}
+                  {{ form.product_2 }}
+                  {{ form.product_2.errors }}
+                </div>
+                <div class="field">
+                  {{ form.quantity_2.label_tag }}
+                  {{ form.quantity_2 }}
+                  {{ form.quantity_2.errors }}
+                </div>
+              </div>
+              <div class="product-row">
+                <div class="field">
+                  {{ form.product_3.label_tag }}
+                  {{ form.product_3 }}
+                  {{ form.product_3.errors }}
+                </div>
+                <div class="field">
+                  {{ form.quantity_3.label_tag }}
+                  {{ form.quantity_3 }}
+                  {{ form.quantity_3.errors }}
+                </div>
+              </div>
+              <button class="primary-button" type="submit">Check box fit <span aria-hidden="true">→</span></button>
+              <p class="hint">Duplicate product selections are automatically combined into one line item.</p>
+            </form>
+          </div>
+        </article>
+
+        <aside class="catalogue-stack" aria-label="Product and box inventory">
+          <section class="card catalogue-card">
+            <div class="card-head">
+              <h2><span class="section-number">02</span>Products</h2>
+              <p class="card-subtitle">Available items and their dimensions.</p>
+            </div>
+            <div class="card-body">
+              <ul class="catalogue-list">
+                {% for product in products %}
+                  <li class="catalogue-item">
+                    <span class="item-icon" aria-hidden="true">▰</span>
+                    <span>
+                      <span class="item-title">{{ product.name }}</span>
+                      <span class="item-detail">{{ product.length_cm }} × {{ product.width_cm }} × {{ product.height_cm }} cm · {{ product.weight_kg }} kg</span>
+                    </span>
+                  </li>
+                {% empty %}
+                  <li class="empty-state">No products yet. Add products in the admin area.</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
+          <section class="card catalogue-card">
+            <div class="card-head">
+              <h2><span class="section-number">03</span>Shipping boxes</h2>
+              <p class="card-subtitle">Internal size, weight limit, and price.</p>
+            </div>
+            <div class="card-body">
+              <ul class="catalogue-list">
+                {% for box in boxes %}
+                  <li class="catalogue-item">
+                    <span class="item-icon" aria-hidden="true">▱</span>
+                    <span>
+                      <span class="item-title">{{ box.name }} · ${{ box.cost }}</span>
+                      <span class="item-detail">{{ box.internal_length_cm }} × {{ box.internal_width_cm }} × {{ box.internal_height_cm }} cm · max {{ box.max_weight_kg }} kg</span>
+                    </span>
+                  </li>
+                {% empty %}
+                  <li class="empty-state">No boxes yet. Add boxes in the admin area.</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
+        </aside>
+      </section>
+
+      {% if order %}
+        {% if recommendation %}
+          <section class="card result result-success" aria-live="polite">
+            <div class="card-body">
+              <p class="eyebrow">Recommendation ready</p>
+              <h2 class="result-title">Your order has a box match</h2>
+              <p class="result-description">The selected box fits the order using a non-overlapping 3D placement and stays within its weight limit.</p>
+              <div class="recommended-box">
+                <div>
+                  <span class="recommended-name">{{ recommendation.name }}</span>
+                  <span class="recommended-size">{{ recommendation.internal_length_cm }} × {{ recommendation.internal_width_cm }} × {{ recommendation.internal_height_cm }} cm internal size</span>
+                </div>
+                <span class="price">${{ recommendation.cost }}</span>
+              </div>
+              <div class="stats">
+                <div class="stat"><span class="stat-label">Order weight</span><span class="stat-value">{{ order.total_weight_kg }} kg / {{ recommendation.max_weight_kg }} kg</span></div>
+                <div class="stat"><span class="stat-label">Product volume</span><span class="stat-value">{{ order.total_volume_cm3 }} cm³</span></div>
+                <div class="stat"><span class="stat-label">Customer</span><span class="stat-value">{{ order.customer_name }}</span></div>
+              </div>
+              <ul class="order-lines">
+                {% for item in order.items.all %}
+                  <li><span>{{ item.product.name }}</span><span>× {{ item.quantity }}</span></li>
+                {% endfor %}
+              </ul>
+              <p class="result-footnote">Lowest-priced box among the boxes that passed the packing check.</p>
+            </div>
+          </section>
+        {% else %}
+          <section class="card result result-warning" aria-live="polite">
+            <div class="card-body">
+              <p class="eyebrow">No safe match</p>
+              <h2 class="result-title">No available box can pack this order</h2>
+              <p class="result-description">The order was checked against each box's dimensions, weight limit, and item placement. Try reducing quantities or adding a larger box.</p>
+              <ul class="order-lines">
+                {% for item in order.items.all %}
+                  <li><span>{{ item.product.name }}</span><span>× {{ item.quantity }}</span></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
+        {% endif %}
+      {% endif %}
+
+      <footer class="footer">Boxwise · Packing suggestions are heuristic and should be checked against operational packaging requirements.</footer>
+    </main>
+  </body>
+</html>
